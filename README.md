@@ -1,6 +1,6 @@
 # HomePage
 
-Your own customised browser homepage, showing your last scrobble from last.fm over an animated background
+A browser homepage, showing your last scrobble from last.fm over an animated background
 
 ## Installation
 
