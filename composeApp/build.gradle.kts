@@ -79,7 +79,7 @@ composeCompiler {
 
 compose.desktop {
     application {
-        mainClass = "com.kmp.template.MainKt"
+        mainClass = "com.shub39.homepage.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
@@ -97,5 +97,5 @@ tasks.register<Copy>("copyWasmArtifacts") {
 }
 
 tasks.register<ComposeHotRun>("runHot") {
-    mainClass.set("com.kmp.template.MainKt")
+    mainClass.set("com.shub39.homepage.MainKt")
 }

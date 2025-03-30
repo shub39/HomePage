@@ -1,10 +1,10 @@
 package com.shub39.homepage.core.domain
 
+import homepage.composeapp.generated.resources.Res
+import homepage.composeapp.generated.resources.dark
+import homepage.composeapp.generated.resources.light
+import homepage.composeapp.generated.resources.system
 import org.jetbrains.compose.resources.StringResource
-import template.composeapp.generated.resources.Res
-import template.composeapp.generated.resources.dark
-import template.composeapp.generated.resources.light
-import template.composeapp.generated.resources.system
 
 enum class AppTheme(val fullName: StringResource) {
     LIGHT(Res.string.light),

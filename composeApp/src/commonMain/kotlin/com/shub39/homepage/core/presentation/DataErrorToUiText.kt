@@ -1,12 +1,12 @@
 package com.shub39.homepage.core.presentation
 
 import com.shub39.homepage.core.domain.DataError
-import template.composeapp.generated.resources.Res
-import template.composeapp.generated.resources.no_internet
-import template.composeapp.generated.resources.no_results
-import template.composeapp.generated.resources.server_error
-import template.composeapp.generated.resources.too_many_requests
-import template.composeapp.generated.resources.unknown
+import homepage.composeapp.generated.resources.Res
+import homepage.composeapp.generated.resources.no_internet
+import homepage.composeapp.generated.resources.no_results
+import homepage.composeapp.generated.resources.server_error
+import homepage.composeapp.generated.resources.too_many_requests
+import homepage.composeapp.generated.resources.unknown
 
 fun DataError.toUiText(): UiText {
     val stringRes = when(this) {

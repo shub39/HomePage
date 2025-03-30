@@ -6,10 +6,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import homepage.composeapp.generated.resources.Res
+import homepage.composeapp.generated.resources.poppins_regular
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.FontResource
-import template.composeapp.generated.resources.Res
-import template.composeapp.generated.resources.poppins_regular
 
 @Composable
 fun provideTypography(

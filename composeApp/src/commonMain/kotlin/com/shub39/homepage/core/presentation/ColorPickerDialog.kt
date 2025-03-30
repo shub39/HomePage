@@ -22,9 +22,9 @@ import com.github.skydoves.colorpicker.compose.AlphaTile
 import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
+import homepage.composeapp.generated.resources.Res
+import homepage.composeapp.generated.resources.done
 import org.jetbrains.compose.resources.stringResource
-import template.composeapp.generated.resources.Res
-import template.composeapp.generated.resources.done
 
 // Color picker used app wide
 @Composable

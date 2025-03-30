@@ -2,27 +2,27 @@ package com.shub39.homepage.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.shub39.homepage.core.domain.Theme
-import com.shub39.homepage.core.presentation.theme.AppTheme
+import com.shub39.homepage.core.presentation.theme.provideTypography
+import com.shub39.homepage.homepage.HomePage
+import com.shub39.homepage.viewmodels.HomePageViewModel
+import org.koin.compose.koinInject
 
 @Composable
-fun App() {
-    var theme by remember { mutableStateOf(Theme()) }
+fun App(
+    navController: NavHostController,
+    homevm: HomePageViewModel = koinInject()
+) {
+    val homeState by homevm.state.collectAsStateWithLifecycle()
 
-    val navController = rememberNavController()
-
-    AppTheme(
-        theme = theme
+    MaterialTheme(
+        typography = provideTypography(1f)
     ) {
         NavHost(
             modifier = Modifier
@@ -33,18 +33,12 @@ fun App() {
         ) {
             composable<Routes.Home> {
                 HomePage(
-                    modifier = Modifier.widthIn(max = 500.dp),
-                    onClickSettings = { navController.navigate(Routes.Settings) }
+                    state = homeState
                 )
             }
 
             composable<Routes.Settings> {
-                SettingsPage(
-                    modifier = Modifier.widthIn(max = 500.dp),
-                    onBack = { navController.navigateUp() },
-                    onThemeChange = { theme = it },
-                    theme = theme
-                )
+
             }
         }
     }
