@@ -13,6 +13,7 @@ ktor = "3.0.3"
 composeIcons = "1.1.1"
 hotreload = "1.0.0-alpha02"
 hypnoticcanvas = "0.4.0-b02"
+materialKolor = "2.1.1"
 buildKonfig = "0.17.0"
 
 [libraries]
@@ -37,6 +38,7 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 
 # Others
+materialKolor = { module = "com.materialkolor:material-kolor", version.ref = "materialKolor" }
 landscapist-coil = { module = "com.github.skydoves:landscapist-coil3", version.ref = "landscapist" }
 landscapist-placeholder = { module = "com.github.skydoves:landscapist-placeholder", version.ref = "landscapist" }
 colorpicker-compose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorpicker" }

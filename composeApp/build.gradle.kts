@@ -2,6 +2,9 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.compose.reload.ComposeHotRun
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -19,7 +22,8 @@ buildkonfig {
     packageName = appPackageName
 
     defaultConfigs {
-
+        buildConfigField(STRING, "USER", getLocalProperty("user"))
+        buildConfigField(STRING, "API_KEY", getLocalProperty("api_key"))
     }
 }
 
@@ -64,6 +68,7 @@ kotlin {
             implementation(libs.colorpicker.compose)
             implementation(libs.composeIcons.fontAwesome)
             api(libs.koin.core)
+            implementation(libs.materialKolor)
             implementation(libs.hypnoticcanvas)
         }
         desktopMain.dependencies {
@@ -98,4 +103,14 @@ tasks.register<Copy>("copyWasmArtifacts") {
 
 tasks.register<ComposeHotRun>("runHot") {
     mainClass.set("com.shub39.homepage.MainKt")
+}
+
+fun getLocalProperty(key: String, defaultValue: String = ""): String {
+    val localProperties = Properties().apply {
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            load(FileInputStream(localPropertiesFile))
+        }
+    }
+    return localProperties.getProperty(key) ?: defaultValue
 }

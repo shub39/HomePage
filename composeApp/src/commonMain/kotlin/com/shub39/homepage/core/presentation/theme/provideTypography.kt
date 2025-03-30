@@ -7,14 +7,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import homepage.composeapp.generated.resources.Res
-import homepage.composeapp.generated.resources.poppins_regular
+import homepage.composeapp.generated.resources.manrope
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.FontResource
 
 @Composable
 fun provideTypography(
     scale: Float = 1f,
-    font: FontResource = Res.font.poppins_regular
+    font: FontResource = Res.font.manrope
 ): Typography {
     val selectedFont = FontFamily(Font(font))
 

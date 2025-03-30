@@ -9,6 +9,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.materialkolor.DynamicMaterialTheme
 import com.shub39.homepage.core.presentation.theme.provideTypography
 import com.shub39.homepage.homepage.HomePage
 import com.shub39.homepage.viewmodels.HomePageViewModel
@@ -21,7 +22,8 @@ fun App(
 ) {
     val homeState by homevm.state.collectAsStateWithLifecycle()
 
-    MaterialTheme(
+    DynamicMaterialTheme(
+        primary = homeState.seedColor,
         typography = provideTypography(1f)
     ) {
         NavHost(
