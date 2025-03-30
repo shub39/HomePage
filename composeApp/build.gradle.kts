@@ -2,35 +2,18 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.compose.reload.ComposeHotRun
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.hotreload)
-    alias(libs.plugins.buildKonfig)
-    alias(libs.plugins.aboutLibraries)
 }
 
-val appName = "Template"
 val appPackageName = "com.kmp.template"
 val appVersionName = "1.0.0"
-val appVersionCode = 1000
 
-
-buildkonfig {
-    packageName = appPackageName
-
-    defaultConfigs {
-        buildConfigField(STRING, "packageName", appPackageName)
-        buildConfigField(STRING, "versionName", appVersionName)
-        buildConfigField(STRING, "versionCode", appVersionCode.toString())
-    }
-}
 
 kotlin {
     // prevents "expect actual classes" gradle warning
@@ -42,12 +25,6 @@ kotlin {
         }
     }
 
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
-    }
-    
     jvm("desktop")
     
     @OptIn(ExperimentalWasmDsl::class)
@@ -59,14 +36,10 @@ kotlin {
     sourceSets {
         val desktopMain by getting
         
-        androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.koin.android)
-            implementation(libs.koin.androidx.compose)
-            implementation(libs.androidx.core.splashscreen)
-        }
         commonMain.dependencies {
+            implementation(libs.bundles.ktor)
+            implementation(libs.landscapist.coil)
+            implementation(libs.landscapist.placeholder)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.ui)
@@ -80,10 +53,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-            implementation(libs.materialKolor)
             implementation(libs.colorpicker.compose)
             implementation(libs.composeIcons.fontAwesome)
-            implementation(libs.aboutLibraries)
             api(libs.koin.core)
         }
         desktopMain.dependencies {
@@ -91,53 +62,6 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
         }
     }
-}
-
-android {
-    namespace = appPackageName
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    defaultConfig {
-        applicationId = appPackageName
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = appVersionCode
-        versionName = appVersionName
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "src/commonMain/proguard-rules.pro"
-            )
-        }
-        debug {
-            resValue("string", "app_name", "$appName Debug")
-            applicationIdSuffix = ".debug"
-            versionNameSuffix = "-debug"
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    buildFeatures {
-        compose = true
-    }
-    dependenciesInfo {
-        includeInApk = false
-        includeInBundle = false
-    }
-}
-
-dependencies {
-    debugImplementation(compose.uiTooling)
 }
 
 composeCompiler {
