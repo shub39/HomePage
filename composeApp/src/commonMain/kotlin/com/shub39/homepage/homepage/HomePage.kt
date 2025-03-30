@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -21,8 +24,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.materialkolor.ktx.darken
-import com.materialkolor.ktx.lighten
 import com.mikepenz.hypnoticcanvas.shaderBackground
 import com.mikepenz.hypnoticcanvas.shaders.MeshGradient
 import com.shub39.homepage.core.presentation.generateColorList
@@ -30,10 +31,14 @@ import com.skydoves.landscapist.coil3.CoilImage
 import com.skydoves.landscapist.components.rememberImageComponent
 import com.skydoves.landscapist.placeholder.shimmer.Shimmer
 import com.skydoves.landscapist.placeholder.shimmer.ShimmerPlugin
+import compose.icons.FontAwesomeIcons
+import compose.icons.fontawesomeicons.Solid
+import compose.icons.fontawesomeicons.solid.DiceSix
 
 @Composable
 fun HomePage(
-    state: HomePageState
+    state: HomePageState,
+    action: (HomePageAction) -> Unit
 ) {
     val seedColor by animateColorAsState(
         targetValue = state.seedColor
@@ -44,7 +49,8 @@ fun HomePage(
             .fillMaxSize()
             .shaderBackground(
                 MeshGradient(
-                    colors = generateColorList(seedColor).toTypedArray()
+                    colors = generateColorList(seedColor).toTypedArray(),
+                    scale = 10f
                 ),
                 speed = state.meshSpeed
             ),
@@ -58,11 +64,12 @@ fun HomePage(
                     modifier = Modifier
                         .background(
                             Brush.verticalGradient(
-                                colors = listOf(Color.Transparent, seedColor.darken(2f))
+                                colors = listOf(Color.Transparent, MaterialTheme.colorScheme.primaryContainer)
                             )
                         )
                         .fillMaxSize()
                 )
+
                 Row(
                     modifier = Modifier
                         .align(Alignment.BottomStart)
@@ -88,14 +95,29 @@ fun HomePage(
                     Column {
                         Text(
                             text = state.currentData.recenttracks.track[0].name,
-                            color = seedColor.lighten(5f),
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.titleLarge
                         )
                         Text(
                             text = state.currentData.recenttracks.track[0].artist.text,
-                            color = seedColor.lighten(5f),
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
                             fontWeight = FontWeight.Bold,
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    IconButton(
+                        onClick = {
+                            action(HomePageAction.OnRandomColors)
+                        }
+                    ) {
+                        Icon(
+                            imageVector = FontAwesomeIcons.Solid.DiceSix,
+                            contentDescription = "Randomise",
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(20.dp)
                         )
                     }
                 }

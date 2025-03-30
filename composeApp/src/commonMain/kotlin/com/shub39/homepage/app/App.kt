@@ -35,7 +35,8 @@ fun App(
         ) {
             composable<Routes.Home> {
                 HomePage(
-                    state = homeState
+                    state = homeState,
+                    action = homevm::onAction
                 )
             }
 

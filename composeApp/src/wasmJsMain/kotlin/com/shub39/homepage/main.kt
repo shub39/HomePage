@@ -22,7 +22,7 @@ fun main() {
 
         LaunchedEffect(Unit) {
             window.bindToNavigation(
-                navcontroller = navcontroller,
+                navController = navcontroller,
                 getBackStackEntryRoute = { it.destination.route?.split(".")?.lastOrNull() ?: "" }
             )
         }

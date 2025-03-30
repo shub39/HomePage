@@ -72,8 +72,12 @@ class HomePageViewModel(
     fun onAction(action: HomePageAction) {
         viewModelScope.launch {
             when (action) {
-                is HomePageAction.OnSearch -> {
-
+                is HomePageAction.OnRandomColors -> {
+                    _state.update {
+                        it.copy(
+                            seedColor = randomColor()
+                        )
+                    }
                 }
             }
         }

@@ -65,7 +65,6 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-            implementation(libs.colorpicker.compose)
             implementation(libs.composeIcons.fontAwesome)
             api(libs.koin.core)
             implementation(libs.materialKolor)
@@ -92,13 +91,6 @@ compose.desktop {
             packageVersion = appVersionName
         }
     }
-}
-
-tasks.register<Copy>("copyWasmArtifacts") {
-    dependsOn("wasmJsBrowserDistribution")
-
-    from(layout.buildDirectory.dir("dist/wasmJs/productionExecutable"))
-    into(layout.projectDirectory.dir("site"))
 }
 
 tasks.register<ComposeHotRun>("runHot") {
