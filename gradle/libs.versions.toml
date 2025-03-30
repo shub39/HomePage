@@ -12,6 +12,8 @@ kotlinx-coroutines = "1.10.1"
 ktor = "3.0.3"
 composeIcons = "1.1.1"
 hotreload = "1.0.0-alpha02"
+hypnoticcanvas = "0.4.0-b02"
+buildKonfig = "0.17.0"
 
 [libraries]
 # Jetbrains
@@ -28,7 +30,6 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
-ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 
 
 # Koin
@@ -41,8 +42,10 @@ landscapist-coil = { module = "com.github.skydoves:landscapist-coil3", version.r
 landscapist-placeholder = { module = "com.github.skydoves:landscapist-placeholder", version.ref = "landscapist" }
 colorpicker-compose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorpicker" }
 composeIcons-fontAwesome = { module = "br.com.devsrsouza.compose.icons:font-awesome", version.ref = "composeIcons" }
+hypnoticcanvas = {group = "com.mikepenz.hypnoticcanvas", name = "hypnoticcanvas", version.ref = "hypnoticcanvas"}
 
 [plugins]
+buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -52,7 +55,6 @@ hotreload = { id = "org.jetbrains.compose.hot-reload", version.ref = "hotreload"
 [bundles]
 ktor = [
     "ktor-client-core",
-    "ktor-client-okhttp",
     "ktor-client-content-negotiation",
     "ktor-client-auth",
     "ktor-client-logging",

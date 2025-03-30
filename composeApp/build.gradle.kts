@@ -9,11 +9,19 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.hotreload)
+    alias(libs.plugins.buildKonfig)
 }
 
-val appPackageName = "com.kmp.template"
+val appPackageName = "com.shub39.homepage"
 val appVersionName = "1.0.0"
 
+buildkonfig {
+    packageName = appPackageName
+
+    defaultConfigs {
+
+    }
+}
 
 kotlin {
     // prevents "expect actual classes" gradle warning
@@ -56,6 +64,7 @@ kotlin {
             implementation(libs.colorpicker.compose)
             implementation(libs.composeIcons.fontAwesome)
             api(libs.koin.core)
+            implementation(libs.hypnoticcanvas)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

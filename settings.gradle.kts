@@ -1,4 +1,4 @@
-rootProject.name = "Template"
+rootProject.name = "HomePage"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
