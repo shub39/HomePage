@@ -5,6 +5,7 @@ import com.shub39.homepage.core.domain.LastFMData
 import com.shub39.homepage.core.presentation.randomColor
 
 data class HomePageState(
+    val userName: String = "shub39",
     val seedColor: Color = randomColor(),
     val meshSpeed: Float = 3f,
     val currentData: LastFMData? = null

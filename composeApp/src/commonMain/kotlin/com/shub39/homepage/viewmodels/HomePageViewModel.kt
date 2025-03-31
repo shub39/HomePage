@@ -33,10 +33,10 @@ class HomePageViewModel(
             _state.value
         )
 
-    private fun observeData() = viewModelScope.launch {
-        while (true) {
+    private fun observeData(loop: Boolean = true) = viewModelScope.launch {
+        do {
             val data: Result<LastFMData, DataError> = safeCall {
-                httpClient.get("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${BuildKonfig.USER}&limit=1&api_key=${BuildKonfig.API_KEY}&format=json")
+                httpClient.get("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${_state.value.userName}&limit=1&api_key=${BuildKonfig.API_KEY}&format=json")
             }
 
             when (data) {
@@ -49,7 +49,13 @@ class HomePageViewModel(
                 }
 
                 is Result.Success<LastFMData> -> {
-                    if (data.data != _state.value.currentData) {
+                    if (data.data.recenttracks.track.isEmpty()) {
+                        _state.update {
+                            it.copy(
+                                currentData = null
+                            )
+                        }
+                    } else if (data.data != _state.value.currentData) {
                         _state.update {
                             it.copy(
                                 currentData = data.data
@@ -66,7 +72,7 @@ class HomePageViewModel(
             }
 
             delay(20000)
-        }
+        } while (loop)
     }
 
     fun onAction(action: HomePageAction) {
@@ -78,6 +84,16 @@ class HomePageViewModel(
                             seedColor = randomColor()
                         )
                     }
+                }
+
+                is HomePageAction.OnChangeUsername -> {
+                    _state.update {
+                        it.copy(
+                            userName = action.name
+                        )
+                    }
+
+                    observeData(loop = false)
                 }
             }
         }

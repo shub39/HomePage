@@ -22,7 +22,6 @@ buildkonfig {
     packageName = appPackageName
 
     defaultConfigs {
-        buildConfigField(STRING, "USER", getLocalProperty("user"))
         buildConfigField(STRING, "API_KEY", getLocalProperty("api_key"))
     }
 }
